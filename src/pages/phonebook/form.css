@@ -1,0 +1,15 @@
+
+body{background-color: white;padding:20px;}
+h1, h2 {color:#000;}
+
+
+table.informationTable {
+    border: '1px solid gray';
+    margin: 20px;
+    padding: '5px 10px';
+    width: 'max-content';
+    min-width: '200px';
+}
+
+th{ text-align: left;}
+td {border-bottom: '1px solid gray';}
