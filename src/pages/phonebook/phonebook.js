@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import './form.css';
-
 
 export function PhoneBook() {
     const [userFirstname, setUserFirstname] = useState("");
@@ -46,117 +44,80 @@ export function PhoneBook() {
             return a[key] < b[key] ? 1 : -1;
           }
         });
-    
         setSortKey(key);
         setSortOrder(order);
         setUserData(sortedData);
       };
 
     return (
-        <>
-        <h1>Phone book code challenge</h1>
-        <form id="phoneBook" onSubmit={e => { e.preventDefault() }} style={style.form.container}>
-            <label>First name:</label>
-            <br />
-            <input 
-                style={style.form.inputs}
-                className='userFirstname'
-                name='userFirstname' 
-                value={userFirstname}
-                onChange={(e) => setUserFirstname(e.target.value)}
-                type='text'
-            />
-            <br/>
-            <label>Last name:</label>
-            <br />
-            <input 
-                style={style.form.inputs}
-                className='userLastname'
-                name='userLastname' 
-                value={userLastname}
-                onChange={(e) => setUserLastname(e.target.value)}
-                type='text' 
-            />
-            <br />
-            <label>Phone:</label>
-            <br />
-            <input
-                style={style.form.inputs}
-                className='userPhone' 
-                name='userPhone' 
-                value={userPhone}
-                onChange={(e) => setUserPhone(e.target.value)}
-                type='text'
-            />
-            <br/>
-            <input 
-                style={style.form.submitBtn} 
-                className='submitButton'
-                type='submit' 
-                value='Add User' 
-                onClick={() => saveUser()}
-            />
-        </form>
-        {/* <pre>
-          {JSON.stringify(userData, undefined, 2)}
-        </pre> */}
-        <InformationTable />
-    </>
+        <div className='container row bs-component col-lg-4 mx-auto d-grid gap-3'>
+          <h1 className='page-header p-2'>Phone book code challenge</h1>
+          <p>Enter first name, last name and phone number to form to build phone book.</p>
+          <form id="phoneBook" className='content-start p-2' onSubmit={e => { e.preventDefault() }}>
+            <fieldset>
+            <div className='form-group row p-2'>
+              <label className='content-start'>First name:</label>
+                <input 
+                    className='userFirstname form-control'
+                    name='userFirstname' 
+                    value={userFirstname}
+                    onChange={(e) => setUserFirstname(e.target.value)}
+                    type='text'
+                />
+              </div>
+              <div className='form-group row  p-2'>
+                <label>Last name:</label>
+                  <input 
+                      className='userLastname form-control'
+                      name='userLastname' 
+                      value={userLastname}
+                      onChange={(e) => setUserLastname(e.target.value)}
+                      type='text' 
+                  />
+              </div>
+              <div className='form-group row  p-2'>
+                <label>Phone:</label>
+                <input
+                    className='userPhoneform-control form-control'  
+                    name='userPhone' 
+                    value={userPhone}
+                    onChange={(e) => setUserPhone(e.target.value)}
+                    type='text'
+                />
+              </div>
+              <div className='bs-component mb-20  p-2'>
+                <button 
+                    className='btn btn-primary btn-lg'
+                    type='button' 
+                    onClick={() => saveUser()}>Add User</button>
+            </div>
+            </fieldset>
+          </form>
+          <InformationTable />
+      </div>
     )
     
     function InformationTable(props) {
         return (
-        <>
+        <div className='mt-20'>
             <h2>Phone book</h2>
             <table className='informationTable'>
                 <thead> 
                 <tr>
-                    <th style={style.tableCell}>First name</th>
-                    <th style={style.tableCell} onClick={() => handleSort('userLastname')}>Last name</th>
-                    <th style={style.tableCell}>Phone</th>
+                    <th>First name</th>
+                    <th onClick={() => handleSort('userLastname')}>Last name</th>
+                    <th>Phone</th>
                 </tr> 
                 </thead> 
                 {userData[0].userFirstname && userData.map((user, index) => (
                 <tr id={`user-${index}`} key={index}>
-                    <td style={style.tableCell}>{user.userFirstname}</td>
-                    <td style={style.tableCell}>{user.userLastname}</td>
-                    <td style={style.tableCell}>{user.userPhone}</td>
+                    <td>{user.userFirstname}</td>
+                    <td>{user.userLastname}</td>
+                    <td>{user.userPhone}</td>
                     </tr>
                 ))}
             </table>
-          </>
+          </div>
         );
       }
-}
-
-const style = {
-  table: {
-    borderCollapse: 'collapse'
-  },
-  tableCell: {
-    margin: 0,
-    padding: '5px 10px',
-    width: 'max-content',
-    minWidth: '150px'
-  },
-  form: {
-    container: {
-      padding: '20px',
-      border: '1px solid #F0F8FF',
-      borderRadius: '15px',
-      width: 'max-content',
-      marginBottom: '40px'
-    },
-    inputs: {
-      marginBottom: '5px'
-    },
-    submitBtn: {
-      marginTop: '10px',
-      padding: '10px 15px',
-      border:'none',
-      backgroundColor: 'lightseagreen',
-      fontSize: '14px',
-      borderRadius: '5px'
-    }
-  }
 }

@@ -1,0 +1,26 @@
+body.phonebook {
+    background-color: #073642;
+    color:#839496;
+}
+
+.phonebook button {
+    background-color: #b58900;
+}
+
+.phonebook .form-control{
+    display: block;
+    width: 100%;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #073642;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-color: #adb5bd;
+    background-clip: padding-box;
+    border: var(--bs-border-width) solid rgba(0, 0, 0, 0.15);
+    border-radius: var(--bs-border-radius);
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
