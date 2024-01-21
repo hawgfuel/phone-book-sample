@@ -51,8 +51,8 @@ export function PhoneBook() {
 
     return (
         <div className='container row bs-component col-lg-4 mx-auto d-grid gap-3'>
-          <h1 className='page-header p-2'>Phone book code challenge</h1>
-          <p>Enter first name, last name and phone number to form to build phone book.</p>
+          <h1 className='page-header p-2'>React Phonebook</h1>
+          <p>Enter first name, last name and phone number in the form below to create a directory or phone book.</p>
           <form id="phoneBook" className='content-start p-2' onSubmit={e => { e.preventDefault() }}>
             <fieldset>
             <div className='form-group row p-2'>
@@ -99,9 +99,10 @@ export function PhoneBook() {
     
     function InformationTable(props) {
         return (
-        <div className='mt-20'>
-            <h2>Phone book</h2>
-            <table className='informationTable'>
+        <div className='table-container'>
+            <h2>Phonebook</h2>
+            <p>Sort by last name</p>
+            <table className='w-100 p-3'>
                 <thead> 
                 <tr>
                     <th>First name</th>
