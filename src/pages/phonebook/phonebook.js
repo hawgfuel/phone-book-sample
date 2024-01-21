@@ -13,20 +13,16 @@ export function PhoneBook() {
         userLastname: userLastname,
         userPhone: userPhone
     } 
-    let dataArr = [];
 
     function saveUser(){
+      let dataArr = [];
         if(userData[0].userFirstname){
-            userData.forEach(function (user) {
-                dataArr.push({
-                    userFirstname: user.userFirstname,
-                    userLastname: user.userLastname,
-                    userPhone: user.userPhone
-                })
-            });
+          dataArr.push(...userData, getFormData);
+          setUserData( dataArr);
+        } else {
+          dataArr.push(getFormData);
+          setUserData(dataArr);
         }
-        dataArr.push(getFormData);
-        setUserData(dataArr);
     };
 
     const handleSort = (key) => {
