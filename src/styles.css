@@ -3,8 +3,9 @@ body.phonebook {
     color:#839496;
 }
 
-.phonebook button {
+.mustard-bg {
     background-color: #b58900;
+    color:#fff;
 }
 
 .phonebook .form-control{
@@ -24,3 +25,10 @@ body.phonebook {
     border-radius: var(--bs-border-radius);
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
+
+.sortable{
+    cursor:pointer;
+}
+
+.asc span:after {content:"\2191";}
+.desc span:after{content:"\2193";}
