@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 export function PhoneBook() {
     const [userFirstname, setUserFirstname] = useState("");
@@ -8,10 +8,6 @@ export function PhoneBook() {
     const [userData, setUserData] = useState([{}]);
     const [sortKey, setSortKey] = useState(null);
     const [sortOrder, setSortOrder] = useState('asc');
-
-    useEffect(() => {
-      console.log(formIsValid);
-  },[formIsValid])
 
     let getFormData = {
         userFirstname: userFirstname,
@@ -118,7 +114,7 @@ export function PhoneBook() {
       </div>
     )
     
-    function InformationTable(props) {
+    function InformationTable() {
         return (
         <div className='table-container'>
             <h2>Phonebook</h2>
