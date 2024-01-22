@@ -110,11 +110,11 @@ export function PhoneBook() {
             </div>
             </fieldset>
           </form>
-          <InformationTable />
+          <DataTable />
       </div>
     )
     
-    function InformationTable() {
+    function DataTable() {
         return (
         <div className='table-container'>
             <h2>Phonebook</h2>
