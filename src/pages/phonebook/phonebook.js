@@ -28,13 +28,10 @@ export function PhoneBook() {
     function saveUser(){
       const isValid = validateForm();
       if(isValid){
-        let dataArr = [];
         if(userData[0].userFirstname){
-          dataArr.push(...userData, getFormData);
-          setUserData( dataArr);
+          setUserData( [...userData, getFormData]);
         } else {
-          dataArr.push(getFormData);
-          setUserData(dataArr);
+          setUserData([getFormData]);
         }
       }
     };
@@ -127,7 +124,7 @@ export function PhoneBook() {
                     <th className='p-2'><span>Phone</span></th>
                 </tr> 
                 </thead> 
-                {userData[0].userFirstname && userData.map((user, index) => (
+                {userData[0].userFirstname !== 'undefined' && userData.map((user, index) => (
                 <tr className="table-dark" id={`user-${index}`} key={index}>
                     <td className='p-2'>{user.userFirstname}</td>
                     <td className='p-2'>{user.userLastname}</td>
