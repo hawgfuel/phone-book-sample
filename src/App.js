@@ -1,9 +1,10 @@
-import { PokemonList } from  "./pages/pokemon-list/pokemon-list";
+import { PhoneBook } from  "./pages/phonebook/phonebook";
+
 
 function App() {
   return (
     <div className="App">
-      <PokemonList />
+      <PhoneBook />
     </div>
   );
 }
