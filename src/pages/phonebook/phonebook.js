@@ -1,22 +1,14 @@
 import React, { useState } from 'react';
 
 export function PhoneBook() {
-    const [userFirstname, setUserFirstname] = useState("");
-    const [userLastname, setUserLastname] = useState("");
-    const [userPhone, setUserPhone] = useState("");
-    const [formIsValid, setFormIsValid] = useState(true);
+    const [formData, setFormData] = useState({firstName: '', lastName: '', phoneNumber: ''});
     const [userData, setUserData] = useState([{}]);
+    const [formIsValid, setFormIsValid] = useState(true);
     const [sortKey, setSortKey] = useState(null);
     const [sortOrder, setSortOrder] = useState('asc');
 
-    let getFormData = {
-        userFirstname: userFirstname,
-        userLastname: userLastname,
-        userPhone: userPhone
-    } 
-
     function validateForm() {
-      if (Object.values(getFormData).includes('')) {
+      if (Object.values(formData).includes('')) {
         setFormIsValid(false);
         return false;
       } else {
@@ -25,13 +17,20 @@ export function PhoneBook() {
       }
     }
 
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    })
+  }
+
     function saveUser(){
       const isValid = validateForm();
       if(isValid){
-        if(userData[0].userFirstname){
-          setUserData( [...userData, getFormData]);
+        if(userData[0].firstName){
+          setUserData( [...userData, formData]);
         } else {
-          setUserData([getFormData]);
+          setUserData([formData]);
         }
       }
     };
@@ -69,11 +68,11 @@ export function PhoneBook() {
               <label className='content-start'>First name:</label>
                 <input 
                     className='userFirstname form-control'
-                    name='userFirstname' 
+                    name='firstName' 
                     placeholder={'First name'}
-                    value={userFirstname}
+                    value={formData.firstName}
                     required={true}
-                    onChange={(e) => setUserFirstname(e.target.value)}
+                    onChange={(e) => handleChange(e)}
                     type='text'
                 />
               </div>
@@ -81,10 +80,10 @@ export function PhoneBook() {
                 <label>Last name:</label>
                   <input 
                       className='userLastname form-control'
-                      name='userLastname' 
-                      value={userLastname}
+                      name='lastName' 
+                      value={formData.lastName}
                       placeholder={'Last name'}
-                      onChange={(e) => setUserLastname(e.target.value)}
+                      onChange={(e) => handleChange(e)}
                       type='text' 
                   />
               </div>
@@ -92,10 +91,10 @@ export function PhoneBook() {
                 <label>Phone:</label>
                 <input
                     className='userPhoneform-control form-control'  
-                    name='userPhone' 
-                    value={userPhone}
+                    name='phoneNumber' 
+                    value={formData.phoneNumber}
                     placeholder={'Phone number'}
-                    onChange={(e) => setUserPhone(e.target.value)}
+                    onChange={(e) => handleChange(e)}
                     type='text'
                 />
               </div>
@@ -124,11 +123,11 @@ export function PhoneBook() {
                     <th className='p-2'><span>Phone</span></th>
                 </tr> 
                 </thead> 
-                {userData[0].userFirstname !== 'undefined' && userData.map((user, index) => (
+                {userData[0].firstName !== 'undefined' && userData.map((user, index) => (
                 <tr className="table-dark" id={`user-${index}`} key={index}>
-                    <td className='p-2'>{user.userFirstname}</td>
-                    <td className='p-2'>{user.userLastname}</td>
-                    <td className='p-2'>{user.userPhone}</td>
+                    <td className='p-2'>{user.firstName}</td>
+                    <td className='p-2'>{user.lastName}</td>
+                    <td className='p-2'>{user.phoneNumber}</td>
                     </tr>
                 ))}
             </table>
