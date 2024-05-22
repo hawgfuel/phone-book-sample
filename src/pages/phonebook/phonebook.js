@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
+import { DataTable } from '../../components/phone-book-table/phone-book-table';
 
 export function PhoneBook() {
     const [formData, setFormData] = useState({firstName: '', lastName: '', phoneNumber: ''});
-    const [userData, setUserData] = useState([{}]);
+    const [userData, setUserData] = useState([]);
     const [formIsValid, setFormIsValid] = useState(true);
     const [sortKey, setSortKey] = useState(null);
     const [sortOrder, setSortOrder] = useState('asc');
@@ -27,7 +28,7 @@ export function PhoneBook() {
     function saveUser(){
       const isValid = validateForm();
       if(isValid){
-        if(userData[0].firstName){
+        if(userData.length > 0){
           setUserData( [...userData, formData]);
         } else {
           setUserData([formData]);
@@ -106,32 +107,7 @@ export function PhoneBook() {
             </div>
             </fieldset>
           </form>
-          <DataTable />
+          <DataTable userData={userData} handleSort={handleSort} sortKey={sortKey} sortOrder={sortOrder} />
       </div>
     )
-    
-    function DataTable() {
-        return (
-        <div className='table-container'>
-            <h2>Phonebook</h2>
-            <p>Sort by last name</p>
-            <table className='w-100 p-3 p-2'>
-                <thead className='mustard-bg'> 
-                <tr>
-                    <th className='p-2'><span>First name</span></th>
-                    <th className={`p-2 ${sortOrder}`} onClick={() => handleSort('userLastname')}><span>Last name</span></th>
-                    <th className='p-2'><span>Phone</span></th>
-                </tr> 
-                </thead> 
-                {userData[0].firstName !== 'undefined' && userData.map((user, index) => (
-                <tr className="table-dark" id={`user-${index}`} key={index}>
-                    <td className='p-2'>{user.firstName}</td>
-                    <td className='p-2'>{user.lastName}</td>
-                    <td className='p-2'>{user.phoneNumber}</td>
-                    </tr>
-                ))}
-            </table>
-          </div>
-        );
-      }
 }
