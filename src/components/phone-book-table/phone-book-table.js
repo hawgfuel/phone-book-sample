@@ -1,7 +1,7 @@
     
     export function DataTable({userData, handleSort, sortKey, sortOrder} ) {
         return (
-        <div className='table-container'>
+        <div className='table-container  col-lg-4 mx-auto d-grid gap-3'>
             <h2>Phonebook</h2>
             <p>Sort by last name</p>
             <table className='w-100 p-3 p-2'>
@@ -15,9 +15,9 @@
                 <tbody>
                     {userData.length > 0  && userData.map((user, index) => (
                     <tr className="table-dark" id={`user-${index}`} key={index}>
-                        <td className='p-2'>{user.firstName}</td>
-                        <td className='p-2'>{user.lastName}</td>
-                        <td className='p-2'>{user.phoneNumber}</td>
+                        <td className='p-2'>{user.userFirstname}</td>
+                        <td className='p-2'>{user.userLastname}</td>
+                        <td className='p-2'>{user.userPhone}</td>
                         </tr>
                     ))}
             </tbody>

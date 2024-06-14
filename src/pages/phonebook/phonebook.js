@@ -1,12 +1,8 @@
 import React, { useState } from 'react';
-import { DataTable } from '../../components/phone-book-table/phone-book-table';
 
-export function PhoneBook() {
-    const [formData, setFormData] = useState({firstName: '', lastName: '', phoneNumber: ''});
-    const [userData, setUserData] = useState([]);
+export function PhoneBook({addEntryToPhoneBook}) {
     const [formIsValid, setFormIsValid] = useState(true);
-    const [sortKey, setSortKey] = useState(null);
-    const [sortOrder, setSortOrder] = useState('asc');
+    const [formData, setFormData] = useState({userFirstname: '', userLastname: '', userPhone: ''});
 
     function validateForm() {
       if (Object.values(formData).includes('')) {
@@ -18,43 +14,21 @@ export function PhoneBook() {
       }
     }
 
+    function handleSubmit(e){
+      const isValid = validateForm();
+      if(isValid){
+        e.preventDefault();
+        addEntryToPhoneBook(formData);
+        setFormData({userFirstname: '', userLastname: '', userPhone: ''});
+      }
+    };
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
     })
   }
-
-    function saveUser(){
-      const isValid = validateForm();
-      if(isValid){
-        if(userData.length > 0){
-          setUserData( [...userData, formData]);
-        } else {
-          setUserData([formData]);
-        }
-      }
-    };
-
-    const handleSort = (key) => {
-        let order = sortOrder;
-        if (sortKey === key) {
-          order = sortOrder === 'asc' ? 'desc' : 'asc';
-        } else {
-          order = 'asc';
-        }
-    
-        const sortedData = [...userData].sort((a, b) => {
-          if (order === 'asc') {
-            return a[key] > b[key] ? 1 : -1;
-          } else {
-            return a[key] < b[key] ? 1 : -1;
-          }
-        });
-        setSortKey(key);
-        setSortOrder(order);
-        setUserData(sortedData);
-      };
 
     return (
         <div className='container row bs-component col-lg-4 mx-auto d-grid gap-3'>
@@ -63,15 +37,15 @@ export function PhoneBook() {
           {!formIsValid && 
               <p className='text-danger'>*All fields are required</p>
           }  
-          <form id="phoneBook" className='content-start p-2' onSubmit={e => { e.preventDefault() }}> 
+          <form id="phoneBook" className='content-start p-2'  onSubmit={handleSubmit}> 
             <fieldset> 
             <div className='form-group row p-2'>
               <label className='content-start'>First name:</label>
                 <input 
                     className='userFirstname form-control'
-                    name='firstName' 
+                    name='userFirstname' 
                     placeholder={'First name'}
-                    value={formData.firstName}
+                    value={formData.userFirstname}
                     required={true}
                     onChange={(e) => handleChange(e)}
                     type='text'
@@ -81,8 +55,8 @@ export function PhoneBook() {
                 <label>Last name:</label>
                   <input 
                       className='userLastname form-control'
-                      name='lastName' 
-                      value={formData.lastName}
+                      name='userLastname' 
+                      value={formData.userLastname}
                       placeholder={'Last name'}
                       onChange={(e) => handleChange(e)}
                       type='text' 
@@ -92,22 +66,22 @@ export function PhoneBook() {
                 <label>Phone:</label>
                 <input
                     className='userPhoneform-control form-control'  
-                    name='phoneNumber' 
-                    value={formData.phoneNumber}
+                    name='userPhone' 
+                    value={formData.userPhone}
                     placeholder={'Phone number'}
                     onChange={(e) => handleChange(e)}
                     type='text'
                 />
               </div>
               <div className='bs-component mb-20  p-2'>
-                <button 
-                    className='btn mustard-bg btn-lg'
-                    type='button' 
-                    onClick={() => saveUser()}>Add User</button>
+              <input 
+                className='submitButton  mustard-bg'
+                type='submit' 
+                value='Add User' 
+              />
             </div>
             </fieldset>
           </form>
-          <DataTable userData={userData} handleSort={handleSort} sortKey={sortKey} sortOrder={sortOrder} />
       </div>
     )
 }
