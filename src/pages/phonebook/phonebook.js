@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useId } from 'react';
 
 export function PhoneBook({addEntryToPhoneBook}) {
     const [formIsValid, setFormIsValid] = useState(true);
@@ -30,6 +30,8 @@ export function PhoneBook({addEntryToPhoneBook}) {
     })
   }
 
+  const ids =  useId();
+
     return (
         <div className='container row bs-component col-lg-4 mx-auto d-grid gap-3'>
           <h1 className='page-header p-2'>React Phonebook</h1>
@@ -40,8 +42,9 @@ export function PhoneBook({addEntryToPhoneBook}) {
           <form id="phoneBook" className='content-start p-2'  onSubmit={handleSubmit}> 
             <fieldset> 
             <div className='form-group row p-2'>
-              <label className='content-start'>First name:</label>
+              <label className='content-start' htmlFor={ids + `userFirstname`}>First name:</label>
                 <input 
+                    id={ids + `userFirstname`}
                     className='userFirstname form-control'
                     name='userFirstname' 
                     placeholder={'First name'}
@@ -52,8 +55,9 @@ export function PhoneBook({addEntryToPhoneBook}) {
                 />
               </div>
               <div className='form-group row  p-2'>
-                <label>Last name:</label>
+                <label htmlFor={ids + `userLastname`}>Last name:</label>
                   <input 
+                      id={ids + `userLastname`}
                       className='userLastname form-control'
                       name='userLastname' 
                       value={formData.userLastname}
@@ -63,8 +67,9 @@ export function PhoneBook({addEntryToPhoneBook}) {
                   />
               </div>
               <div className='form-group row  p-2'>
-                <label>Phone:</label>
+                <label htmlFor={ids + `userPhone`}>Phone:</label>
                 <input
+                    id={ids + `userPhone`}
                     className='userPhoneform-control form-control'  
                     name='userPhone' 
                     value={formData.userPhone}
