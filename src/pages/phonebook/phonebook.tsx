@@ -1,8 +1,19 @@
-import React, { useState, useId } from 'react';
+import React, { useState, useId, ChangeEvent, FormEvent } from 'react';
 
-export function PhoneBook({addEntryToPhoneBook}) {
+// Define the type for the form data and the props
+interface UserData {
+  userFirstname: string;
+  userLastname: string;
+  userPhone: string;
+}
+
+interface PhoneBookProps {
+  addEntryToPhoneBook: (newUser: UserData) => void;
+}
+
+export function PhoneBook({addEntryToPhoneBook}: PhoneBookProps) {
     const [formIsValid, setFormIsValid] = useState(true);
-    const [formData, setFormData] = useState({userFirstname: '', userLastname: '', userPhone: ''});
+    const [formData, setFormData] = useState<UserData>({userFirstname: '', userLastname: '', userPhone: ''});
 
     function validateForm() {
       if (Object.values(formData).includes('')) {
@@ -14,7 +25,7 @@ export function PhoneBook({addEntryToPhoneBook}) {
       }
     }
 
-    function handleSubmit(e){
+    function handleSubmit(e: FormEvent<HTMLFormElement>){
       const isValid = validateForm();
       if(isValid){
         e.preventDefault();
@@ -23,7 +34,7 @@ export function PhoneBook({addEntryToPhoneBook}) {
       }
     };
 
-  const handleChange = (e) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
